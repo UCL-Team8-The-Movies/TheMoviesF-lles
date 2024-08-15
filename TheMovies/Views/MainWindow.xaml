@@ -1,0 +1,36 @@
+﻿<Window x:Class="TheMovies.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TheMovies" xmlns:viewmodels="clr-namespace:TheMovies.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <TextBlock x:Name="TbTitle" Text="Title:" Margin="10"/>
+            <TextBox x:Name="TxtTitle" Margin="5" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock x:Name="TbDuration" Text="Duration:" Margin="10"/>
+            <TextBox x:Name="TxtDuration" Margin="5" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock x:Name="TbGenre" Text="Genre:" Margin="10"/>
+            <TextBox x:Name="TxtGenre" Margin="5" Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="BtnAdd" Content="Add" Width="75" Margin="10, 50, 10, 10" HorizontalAlignment="Left" Command="{Binding AddAndSaveCommand}"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgMovies" Grid.Column="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding MovieVMs}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Width="1*" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Duration}"/>
+                <DataGridTextColumn Header="Genre" Width="1*" Binding="{Binding Genre}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
