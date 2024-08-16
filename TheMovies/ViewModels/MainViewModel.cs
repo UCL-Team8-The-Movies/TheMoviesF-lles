@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using TheMovies.Models;
 using TheMovies.MVVM;
 using TheMovies.Persistence;
@@ -7,7 +8,7 @@ namespace TheMovies.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private MovieRepo movieRepo;
+    public MovieRepo movieRepo;
     public ObservableCollection<MovieViewModel> MovieVMs { get; set; }
 
     //Commands.
@@ -67,6 +68,7 @@ public class MainViewModel : ViewModelBase
 
     public void AddMovie()
     {
+
         Movie movie = new Movie
         {
             Title = Title,
@@ -74,9 +76,18 @@ public class MainViewModel : ViewModelBase
             Genre = Genre
         };
 
-        movieRepo.Add(movie);
-        MovieViewModel movieVM = new MovieViewModel(movie);
-        MovieVMs.Add(movieVM);
+
+        if (String.IsNullOrEmpty(movie.Title) || movie.Duration <= 0 || String.IsNullOrEmpty(movie.Genre))
+        {
+            throw new ArgumentException("Title, duration, and genre cannot be empty");
+        }
+        else
+        {
+            movieRepo.Add(movie);
+            MovieViewModel movieVM = new MovieViewModel(movie);
+            MovieVMs.Add(movieVM);
+        }
+
     }
 
     public void SaveToFile()

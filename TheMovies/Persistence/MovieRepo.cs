@@ -64,7 +64,9 @@ public class MovieRepo : IRepo<Movie>
                 }
             }
         }
+
     }
+        public void ClearMovies() => movies.Clear(); 
 
 
 
