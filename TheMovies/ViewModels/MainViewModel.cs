@@ -5,7 +5,7 @@ using TheMovies.Persistence;
 
 namespace TheMovies.ViewModels;
 
-internal class MainViewModel : ViewModelBase
+public class MainViewModel : ViewModelBase
 {
     private MovieRepo movieRepo;
     public ObservableCollection<MovieViewModel> MovieVMs { get; set; }

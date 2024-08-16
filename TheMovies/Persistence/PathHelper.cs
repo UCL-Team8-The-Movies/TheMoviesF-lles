@@ -2,7 +2,7 @@
 
 namespace TheMovies.Persistence;
 
-internal class PathHelper
+public class PathHelper
 {
     public static string GetSolutionDirectory()
     {
