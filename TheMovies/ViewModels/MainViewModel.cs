@@ -13,7 +13,7 @@ internal class MainViewModel : ViewModelBase
     //Commands.
     //public RelayCommand NameOfCommand => new RelayCommand(execute => { }, canExecute => { return true; });
     public RelayCommand LoadCommand => new RelayCommand(execute => LoadFromFile(), canExecute => { return true; });
-    public RelayCommand AddAndSaveCommand => new RelayCommand(execute => AddAndSave(), canExecute => { return true; });
+    public RelayCommand AddAndSaveCommand => new RelayCommand(execute => AddAndSave(), canExecute => CanAdd());
 
 
     public MainViewModel()
@@ -59,10 +59,10 @@ internal class MainViewModel : ViewModelBase
         }
     }
 
-    public void AddAndSave() 
+    public void AddAndSave()
     {
         AddMovie();
-        SaveToFile();   
+        SaveToFile();
     }
 
     public void AddMovie()
@@ -76,7 +76,7 @@ internal class MainViewModel : ViewModelBase
 
         movieRepo.Add(movie);
         MovieViewModel movieVM = new MovieViewModel(movie);
-        MovieVMs.Add(movieVM); 
+        MovieVMs.Add(movieVM);
     }
 
     public void SaveToFile()
@@ -93,5 +93,18 @@ internal class MainViewModel : ViewModelBase
         {
             MovieVMs.Add(new MovieViewModel(movie));
         }
+    }
+
+    public bool CanAdd()
+    {
+        if (String.IsNullOrWhiteSpace(Title) || Duration <= 0 || String.IsNullOrWhiteSpace(Genre))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
     }
 }
