@@ -19,7 +19,7 @@ public class UnitTest1
         movie.Duration = 120;
         movie.Genre = "action";
 
-        //Tilføjer film til movierepo
+        //Tilfï¿½jer film til movierepo
         movierepo.Add(movie);
         var movies = movierepo.GetAll();
         List<Movie> movieList = movies.ToList();
@@ -46,13 +46,13 @@ public class UnitTest1
 
         mainViewModel.movieRepo.ClearMovies();
 
-        //Tilføj film til mainviewmodels movierepo
+        //Tilfï¿½j film til mainviewmodels movierepo
         mainViewModel.AddMovie();
 
         //retunerer IEnumerable med alle film i mvm's movierepo
         var movies = mainViewModel.movieRepo.GetAll();
 
-        //Konvertér IEnumerable til List
+        //Konvertï¿½r IEnumerable til List
         List<Movie> movieList = movies.ToList();
 
         Assert.AreEqual("hej", movieList[0].Title);
