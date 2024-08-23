@@ -10,27 +10,30 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="600"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <TextBlock x:Name="TbTitle" Text="Title:" Margin="10"/>
-            <TextBox x:Name="TxtTitle" Margin="5" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock x:Name="TbDuration" Text="Duration:" Margin="10"/>
-            <TextBox x:Name="TxtDuration" Margin="5" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock x:Name="TbGenre" Text="Genre:" Margin="10"/>
-            <TextBox x:Name="TxtGenre" Margin="5" Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button x:Name="BtnAdd" Content="Add" Width="75" Margin="10, 50, 10, 10" HorizontalAlignment="Left" Command="{Binding AddAndSaveCommand}"/>
+        <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Center">
+            <Button Content="Tilføj Film" Margin="10"/>
+            <Button Content="Tilføj Forestilling" Margin="10"/>
         </StackPanel>
 
-        <DataGrid x:Name="dgMovies" Grid.Column="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding MovieVMs}">
+        <DataGrid x:Name="dgMovies" Grid.Column="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding ShowingVMs}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Width="1*" Binding="{Binding Title}"/>
-                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Duration}"/>
-                <DataGridTextColumn Header="Genre" Width="1*" Binding="{Binding Genre}"/>
+                <DataGridTextColumn Header="Biograf" Width="1*" Binding="{Binding Cinema.Name}"/>
+                <DataGridTextColumn Header="By" Width="1*" Binding="{Binding Cinema.City}"/>
+                <DataGridTextColumn Header="Sal" Width="1*" Binding="{Binding Cinema.MaxCinemaHall}"/>
+                <DataGridTextColumn Header="Film" Width="1*" Binding="{Binding Movie.Title}"/>
+                <DataGridTextColumn Header="Genre" Width="1*" Binding="{Binding Movie.Genre}"/>
+                <DataGridTextColumn Header="Instruktør" Width="1*" Binding="{Binding Movie.Director}"/>
+                <DataGridTextColumn Header="Varighed" Width="1*" Binding="{Binding ShowingDuration}"/>
+                <DataGridTextColumn Header="Dato" Width="1*" Binding="{Binding ShowingDate}"/>
             </DataGrid.Columns>
         </DataGrid>
 
     </Grid>
+
+    <!--return $"{Cinema.Name},{Cinema.City},{Cinema.MaxCinemaHall},{Movie.Title},{Movie.Genre},{Movie.Director},{ShowingDuration},{ShowingDate}";-->
+
 </Window>
