@@ -25,7 +25,6 @@ public class MoviePageViewModel : ViewModelBase
 
     private string title;
 
-
     public string Title
     {
         get { return title; }
@@ -59,6 +58,32 @@ public class MoviePageViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
+
+    private string director;
+
+    public string Director
+    {
+        get { return director; }
+        set 
+        { 
+            director = value; 
+            OnPropertyChanged();
+        }
+    }
+
+
+    private DateTime premierDate;
+
+    public DateTime PremierDate
+    {
+        get { return premierDate; }
+        set
+        {
+            premierDate = value;
+            OnPropertyChanged();
+        }
+    }
+
 
     public void AddAndSave()
     {
