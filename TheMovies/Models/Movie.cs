@@ -7,6 +7,7 @@ public class Movie
     public int Duration { get; set; }
     public string Genre { get; set; }
 
-
+    public string Director { get; set; }
+    public DateTime PremierDate { get; set; }
 
 }

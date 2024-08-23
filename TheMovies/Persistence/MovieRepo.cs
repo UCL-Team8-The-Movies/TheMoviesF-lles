@@ -28,11 +28,11 @@ public class MovieRepo : IRepo<Movie>
     {
         using (StreamWriter sw = new StreamWriter(filePath))
         {
-            sw.WriteLine("Titel,Varighed,Genre");
+            sw.WriteLine("Titel,Varighed,Genre,Instruktør,Præmieredato");
 
             foreach (Movie movie in movies)
             {
-                sw.WriteLine($"{movie.Title},{movie.Duration},{movie.Genre}");
+                sw.WriteLine($"{movie.Title},{movie.Duration},{movie.Genre},{movie.Director},{movie.PremierDate}");
             }
 
         }
@@ -52,21 +52,24 @@ public class MovieRepo : IRepo<Movie>
 
                 string[] values = line.Split(',');
                 int duration;
+                DateTime premierDate;
 
-                if (int.TryParse(values[1], out duration))
+                if (int.TryParse(values[1], out duration) && DateTime.TryParse(values[4], out premierDate))
                 {
                     movies.Add(new Movie()
                     {
                         Title = values[0],
                         Duration = duration,
-                        Genre = values[2]
+                        Genre = values[2],
+                        Director = values[3],
+                        PremierDate = premierDate
                     });
                 }
             }
         }
 
     }
-        public void ClearMovies() => movies.Clear(); 
+    public void ClearMovies() => movies.Clear();
 
 
 
