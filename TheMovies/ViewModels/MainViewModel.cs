@@ -8,114 +8,80 @@ namespace TheMovies.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public MovieRepo movieRepo;
-    public ObservableCollection<MovieViewModel> MovieVMs { get; set; }
+    public CinemaRepo cinemaRepo;
+    public ShowingRepo showingRepo;
+
+    public ObservableCollection<ShowingViewModel> ShowingVMs { get; set; }
 
     //Commands.
     //public RelayCommand NameOfCommand => new RelayCommand(execute => { }, canExecute => { return true; });
-    public RelayCommand LoadCommand => new RelayCommand(execute => LoadFromFile(), canExecute => { return true; });
-    public RelayCommand AddAndSaveCommand => new RelayCommand(execute => AddAndSave(), canExecute => CanAdd());
+    
 
 
     public MainViewModel()
     {
-        movieRepo = new MovieRepo();
-        MovieVMs = [];
+        cinemaRepo = new CinemaRepo();
+        showingRepo = new ShowingRepo();
+        ShowingVMs = [];
         LoadFromFile();
     }
 
-    private string title;
+    private Cinema cinema;
 
-    public string Title
+    public Cinema Cinema
     {
-        get { return title; }
+        get { return cinema; }
+        set { cinema = value; }
+    }
+
+
+    private Movie movie;
+
+    public Movie Movie
+    {
+        get { return movie; }
         set
         {
-            title = value;
+            movie = value;
             OnPropertyChanged();
         }
     }
 
-    private int duration;
+    private int showingDuration;
 
-    public int Duration
+    public int ShowingDuration
     {
-        get { return duration; }
+        get { return showingDuration; }
         set
         {
-            duration = value;
+            showingDuration = value;
             OnPropertyChanged();
         }
     }
 
-    private string genre;
+    private string showingDate;
 
-    public string Genre
+    public string ShowingDate
     {
-        get { return genre; }
+        get { return showingDate; }
         set
         {
-            genre = value;
+            showingDate = value;
             OnPropertyChanged();
         }
     }
 
-    public void AddAndSave()
-    {
-        AddMovie();
-        SaveToFile();
-    }
-
-    public void AddMovie()
-    {
-
-        Movie movie = new Movie
-        {
-            Title = Title,
-            Duration = Duration,
-            Genre = Genre
-        };
-
-
-        if (String.IsNullOrEmpty(movie.Title) || movie.Duration <= 0 || String.IsNullOrEmpty(movie.Genre))
-        {
-            throw new ArgumentException("Title, duration, and genre cannot be empty");
-        }
-        else
-        {
-            movieRepo.Add(movie);
-            MovieViewModel movieVM = new MovieViewModel(movie);
-            MovieVMs.Add(movieVM);
-        }
-
-    }
-
-    public void SaveToFile()
-    {
-        movieRepo.SaveToFile();
-    }
 
     public void LoadFromFile()
     {
-        movieRepo.LoadFromFile();
-        MovieVMs.Clear();
+        showingRepo.LoadFromFile();
+        ShowingVMs.Clear();
 
-        foreach (Movie movie in movieRepo.GetAll())
+        foreach (Showing showing in showingRepo.GetAll())
         {
-            MovieVMs.Add(new MovieViewModel(movie));
+            ShowingVMs.Add(new ShowingViewModel(showing));
         }
     }
 
-    public bool CanAdd()
-    {
-        if (String.IsNullOrWhiteSpace(Title) || Duration <= 0 || String.IsNullOrWhiteSpace(Genre))
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-
-    }
+ 
 }

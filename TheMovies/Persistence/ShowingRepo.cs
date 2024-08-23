@@ -32,7 +32,7 @@ public class ShowingRepo : IRepo<Showing>
 
             foreach (Showing showing in showings)
             {
-                sw.WriteLine($"{showing.Movie.Title},{showing.Movie.Duration},{showing.Movie.Genre}, {showing.Movie.Director}, {showing.Movie.PremierDate}, {showing.Cinema.Name},{showing.Cinema.City},{showing.Cinema.CinemaHall},{showing.ShowingDuration},{showing.ShowingDate}");
+                sw.WriteLine($"{showing.Movie.Title},{showing.Movie.Duration},{showing.Movie.Genre}, {showing.Movie.Director}, {showing.Movie.PremierDate}, {showing.Cinema.Name},{showing.Cinema.City},{showing.Cinema.MaxCinemaHall},{showing.ShowingDuration},{showing.ShowingDate}");
             }
         }
     }
@@ -49,7 +49,7 @@ public class ShowingRepo : IRepo<Showing>
             while ((line = sr.ReadLine()) != null)
             {
 
-                string[] values = line.Split(',');
+                string[] values = line.Split(';');
 
                 int movieDuration;
                 DateTime premierDate;
@@ -73,7 +73,7 @@ public class ShowingRepo : IRepo<Showing>
                         {
                             Name = values[5],
                             City = values[6],
-                            CinemaHall = values[7]
+                            MaxCinemaHall = values[7]
                         },
 
                         ShowingDuration = showingDuration,
