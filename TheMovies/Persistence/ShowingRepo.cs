@@ -16,7 +16,7 @@ public class ShowingRepo : IRepo<Showing>
 
     public void Add(Showing showing)
     {
-       this.showings.Add(showing);
+        this.showings.Add(showing);
     }
 
     public IEnumerable<Showing> GetAll()
@@ -39,6 +39,7 @@ public class ShowingRepo : IRepo<Showing>
 
     public void LoadFromFile()
     {
+        CheckForNonExistingFile();
         this.showings.Clear();
 
         using (StreamReader sr = new StreamReader(filePath))
@@ -89,4 +90,17 @@ public class ShowingRepo : IRepo<Showing>
         }
 
     }
+
+
+    public void CheckForNonExistingFile()
+    {
+        if (!File.Exists(filePath))
+        {
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                sw.WriteLine("Filmtitel;Filmvarighed;Filmgenre;Filninstruktør;Filmpræmieredato;Biografnavn;Biografby;Biografsal;Forestillingsvarighed;Forestillingsdato");
+            }
+        }
+    }
+
 }

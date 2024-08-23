@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Center">
-            <Button Content="Tilføj Film" Margin="10"/>
+            <Button Content="Tilføj Film" Margin="10" Command="{Binding GoToMoviePageCommand}"/>
             <Button Content="Tilføj Forestilling" Margin="10"/>
         </StackPanel>
 

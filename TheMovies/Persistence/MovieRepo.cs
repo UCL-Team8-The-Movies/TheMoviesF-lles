@@ -28,7 +28,7 @@ public class MovieRepo : IRepo<Movie>
     {
         using (StreamWriter sw = new StreamWriter(filePath))
         {
-            sw.WriteLine("Titel,Varighed,Genre,Instruktør,Præmieredato");
+            sw.WriteLine("Titel;Varighed;Genre;Instruktør;Præmieredato");
 
             foreach (Movie movie in movies)
             {
@@ -40,6 +40,7 @@ public class MovieRepo : IRepo<Movie>
 
     public void LoadFromFile()
     {
+        CheckForNonExistingFile();
         movies.Clear();
 
         using (StreamReader sr = new StreamReader(filePath))
@@ -50,7 +51,7 @@ public class MovieRepo : IRepo<Movie>
             while ((line = sr.ReadLine()) != null)
             {
 
-                string[] values = line.Split(',');
+                string[] values = line.Split(';');
                 int duration;
                 DateTime premierDate;
 
@@ -69,6 +70,18 @@ public class MovieRepo : IRepo<Movie>
         }
 
     }
+
+    public void CheckForNonExistingFile()
+    {
+        if (!File.Exists(filePath))
+        {
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                sw.WriteLine("TitelVarighed;Genre;Instruktør;Præmieredato");
+            }
+        }
+    }
+
     public void ClearMovies() => movies.Clear();
 
 

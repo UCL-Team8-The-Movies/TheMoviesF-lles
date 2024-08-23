@@ -16,20 +16,26 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
-            <TextBlock x:Name="TbTitle" Text="Title:" Margin="10"/>
+            <TextBlock x:Name="TbTitle" Text="Titel:" Margin="10"/>
             <TextBox x:Name="TxtTitle" Margin="5" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock x:Name="TbDuration" Text="Duration:" Margin="10"/>
+            <TextBlock x:Name="TbDuration" Text="Varighed:" Margin="10"/>
             <TextBox x:Name="TxtDuration" Margin="5" Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock x:Name="TbGenre" Text="Genre:" Margin="10"/>
             <TextBox x:Name="TxtGenre" Margin="5" Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button x:Name="BtnAdd" Content="Add" Width="75" Margin="10, 50, 10, 10" HorizontalAlignment="Left" Command="{Binding AddAndSaveCommand}"/>
+            <TextBlock x:Name="TbDirector" Text="Instruktør:" Margin="10"/>
+            <TextBox x:Name="TxtDirector" Margin="5" Text="{Binding Director, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock x:Name="TbPremierDate" Text="Præmieredato:" Margin="10"/>
+            <TextBox x:Name="TxtPremierDate" Margin="5" Text="{Binding PremierDate, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="BtnAdd" Content="Tilføj" Width="75" Margin="10, 50, 10, 10" HorizontalAlignment="Left" Command="{Binding AddAndSaveCommand}"/>
         </StackPanel>
 
         <DataGrid x:Name="dgMovies" Grid.Column="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding MovieVMs}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Width="1*" Binding="{Binding Title}"/>
-                <DataGridTextColumn Header="Duration" Width="1*" Binding="{Binding Duration}"/>
+                <DataGridTextColumn Header="Titel" Width="1*" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Varighed" Width="1*" Binding="{Binding Duration}"/>
                 <DataGridTextColumn Header="Genre" Width="1*" Binding="{Binding Genre}"/>
+                <DataGridTextColumn Header="Instruktør" Width="1*" Binding="{Binding Director}"/>
+                <DataGridTextColumn Header="Præmieredato" Width="1*" Binding="{Binding PremierDate}"/>
             </DataGrid.Columns>
         </DataGrid>
 

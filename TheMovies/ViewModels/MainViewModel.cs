@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Navigation;
 using TheMovies.Models;
 using TheMovies.MVVM;
 using TheMovies.Persistence;
+using TheMovies.Views;
 
 namespace TheMovies.ViewModels;
 
@@ -15,7 +17,10 @@ public class MainViewModel : ViewModelBase
 
     //Commands.
     //public RelayCommand NameOfCommand => new RelayCommand(execute => { }, canExecute => { return true; });
-    
+    public RelayCommand GoToMoviePageCommand => new RelayCommand(execute => {
+        MoviePageWindow window1 = new MoviePageWindow();
+        window1.ShowDialog();
+    }, canExecute => { return true; });
 
 
     public MainViewModel()
