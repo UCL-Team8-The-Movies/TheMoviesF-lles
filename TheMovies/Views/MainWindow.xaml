@@ -15,8 +15,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Center">
-            <Button Content="Tilføj Film" Margin="10" Command="{Binding GoToMoviePageCommand}"/>
-            <Button Content="Tilføj Forestilling" Margin="10"/>
+            <Button Content="Tilføj Film" Margin="10" Command="{Binding GoToMoviePageWindowCommand}"/>
+            <Button Content="Tilføj Forestilling" Margin="10" Command="{Binding GoToShowingPageWindowCommand}"/>
         </StackPanel>
 
         <DataGrid x:Name="dgMovies" Grid.Column="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding ShowingVMs}">

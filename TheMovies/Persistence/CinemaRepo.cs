@@ -11,4 +11,12 @@ public class CinemaRepo
         new Cinema() { Name = "Thorsminde Lokalbiograf", City = "Thorsminde", MaxCinemaHall = "2" },
         new Cinema() { Name = "Ræhr Bio", City = "Ræhr", MaxCinemaHall = "2" },
     };
+
+
+    public IEnumerable<Cinema> GetAll()
+    {
+        return Cinemas;
+    }
+
+
 }

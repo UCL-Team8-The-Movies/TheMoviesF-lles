@@ -13,10 +13,21 @@ public class ShowingPageViewModel : ViewModelBase
 
     private ObservableCollection<MovieViewModel> movieVMs = [];
 
+    private List<Cinema> cinemas;
+
     //Commands.
     //public RelayCommand NameOfCommand => new RelayCommand(execute => { }, canExecute => { return true; });
-    
 
+    public ShowingPageViewModel()
+    {
+        
+        cinemaRepo = new CinemaRepo();
+        
+        cinemas = new List<Cinema>();
+        LoadCinemas();
+
+
+    }
 
     private Movie movie;
 
@@ -54,6 +65,15 @@ public class ShowingPageViewModel : ViewModelBase
         }
     }
 
+    // Added Cinema prop: skal bruges til at lave et showing objekt.
+    private Cinema cinema;
+
+    public Cinema Cinema
+    {
+        get { return cinema; }
+        set { cinema = value; }
+    }
+
 
     private Movie selectedItem;
 
@@ -78,6 +98,16 @@ public class ShowingPageViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
+
+
+    public void LoadCinemas()
+    {
+        foreach (Cinema cinema in cinemaRepo.GetAll())
+        {
+            this.cinemas.Add(cinema);
+        }
+    }
+
 
     //public void AddAndSave()
     //{
