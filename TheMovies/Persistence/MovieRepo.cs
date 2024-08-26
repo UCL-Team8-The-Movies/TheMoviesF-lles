@@ -32,7 +32,7 @@ public class MovieRepo : IRepo<Movie>
 
             foreach (Movie movie in movies)
             {
-                sw.WriteLine($"{movie.Title},{movie.Duration},{movie.Genre},{movie.Director},{movie.PremierDate}");
+                sw.WriteLine($"{movie.Title};{movie.Duration};{movie.Genre};{movie.Director};{movie.PremierDate}");
             }
 
         }

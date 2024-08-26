@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Navigation;
 using TheMovies.Models;
 using TheMovies.MVVM;
 using TheMovies.Persistence;
@@ -92,10 +90,13 @@ public class MainViewModel : ViewModelBase
         MoviePageWindow moviePageWindow = new MoviePageWindow();
         moviePageWindow.ShowDialog();
     }
- 
+
     public void GoToShowingPageWindow()
     {
         ShowingPageWindow showingPageWindow = new ShowingPageWindow();
         showingPageWindow.ShowDialog();
     }
+
+
+
 }

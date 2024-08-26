@@ -98,7 +98,10 @@ public class MoviePageViewModel : ViewModelBase
         {
             Title = Title,
             Duration = Duration,
-            Genre = Genre
+            Genre = Genre,
+            Director = Director,
+            PremierDate = PremierDate
+
         };
 
 

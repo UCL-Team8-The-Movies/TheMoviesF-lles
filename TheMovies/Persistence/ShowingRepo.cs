@@ -26,13 +26,14 @@ public class ShowingRepo : IRepo<Showing>
 
     public void SaveToFile()
     {
-        using (StreamWriter sw = new StreamWriter(filePath))
+        using (StreamWriter sw = new StreamWriter(filePath, true))
         {
-            sw.WriteLine("Filmtitel,Filmvarighed,Filmgenre,Filninstruktør,Filmpræmieredato,Biografnavn,Biografby,Biografsal,Forestillingsvarighed,Forestillingsdato");
+            if (!File.Exists(this.filePath))           
+                sw.WriteLine("Filmtitel;Filmvarighed;Filmgenre;Filninstruktr;Filmprmieredato;Biografnavn;Biografby;MaxBiografSale;Biografsal;Forestillingsvarighed;Forestillingsdato");
 
             foreach (Showing showing in showings)
             {
-                sw.WriteLine($"{showing.Movie.Title},{showing.Movie.Duration},{showing.Movie.Genre}, {showing.Movie.Director}, {showing.Movie.PremierDate}, {showing.Cinema.Name},{showing.Cinema.City},{showing.Cinema.MaxCinemaHall},{showing.ShowingDuration},{showing.ShowingDate}");
+                sw.WriteLine($"{showing.Movie.Title};{showing.Movie.Duration};{showing.Movie.Genre};{showing.Movie.Director};{showing.Movie.PremierDate};{showing.Cinema.Name};{showing.Cinema.City};{showing.Cinema.MaxCinemaHall};{showing.CinemaHall};{showing.ShowingDuration};{showing.ShowingDate}");
             }
         }
     }
@@ -54,11 +55,35 @@ public class ShowingRepo : IRepo<Showing>
 
                 int movieDuration;
                 DateTime premierDate;
+                int maxCinemaHalls;
                 int showingDuration;
                 DateTime showingDate;
 
-                if (int.TryParse(values[1], out movieDuration) && DateTime.TryParse(values[4], out premierDate) && int.TryParse(values[8], out showingDuration) && DateTime.TryParse(values[9], out showingDate))
+                if (int.TryParse(values[1], out movieDuration) 
+                    && DateTime.TryParse(values[4], out premierDate)
+                    && int.TryParse(values[7], out maxCinemaHalls)
+                    && int.TryParse(values[9], out showingDuration) 
+                    && DateTime.TryParse(values[10], out showingDate))
                 {
+
+                    // Håndter Cinema objekt
+                    Cinema cinema = new Cinema()
+                    {
+                        Name = values[5],
+                        City = values[6],
+                        MaxCinemaHall = maxCinemaHalls,
+                        CinemaHalls = new List<string>()
+                    };
+
+                    // Tilføj en sal afhængig af hvad MaxCinemaHalls læses til at være
+                    for (int i = 1; i <= cinema.MaxCinemaHall; i++)
+                    {
+                        cinema.CinemaHalls.Add($"Sal {i}");
+                    }
+
+
+
+                    // Håndter Showing objekt
                     this.showings.Add(new Showing()
                     {
                         Movie = new Movie()
@@ -69,17 +94,13 @@ public class ShowingRepo : IRepo<Showing>
                             Director = values[3],
                             PremierDate = premierDate
                         },
-
-                        Cinema = new Cinema()
-                        {
-                            Name = values[5],
-                            City = values[6],
-                            MaxCinemaHall = values[7]
-                        },
-
+                        
+                        //sæt Cinema attribute i Showingobjektet til ovenstående Cinema objekt
+                        Cinema = cinema,
+                        CinemaHall = values[8],
                         ShowingDuration = showingDuration,
                         ShowingDate = showingDate
-                    });
+                    }); 
                 }
 
                 else

@@ -4,6 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TheMovies.Views"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:viewmodels="clr-namespace:TheMovies.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:ShowingPageViewModel}"
         mc:Ignorable="d"
         Title="ShowingPageWindow"
         Height="450"
@@ -24,7 +27,10 @@
             <ComboBox x:Name="CbCinema"
                       Margin="10,0,10,5"
                       Width="190"
-                      HorizontalAlignment="Left" ContextMenu="{Binding }"/>
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding Cinemas}"
+                      SelectedItem="{Binding SelectedCinema}"
+                      DisplayMemberPath="Name" />
 
             <TextBlock x:Name="TbMovieHall"
                        Text="Biografsal:"
@@ -32,48 +38,60 @@
             <ComboBox x:Name="CbMovieHall"
                       Margin="10,0,10,5"
                       Width="190"
-                      HorizontalAlignment="Left" />
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding CinemaHalls}"
+                      SelectedItem="{Binding SelectedCinemaHall}"/>
 
             <TextBlock x:Name="TbMovie"
                        Text="Film:"
                        Margin="10,5,10,0" />
             <TextBox x:Name="TxtMovie"
                      Margin="10,0,10,10"
-                     Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding SelectedMovie.Title, UpdateSourceTrigger=PropertyChanged}"
+                     IsEnabled="False" />
 
             <TextBlock x:Name="TbDuration"
-                       Text="Varighed:"
+                       Text="Varighed (+30 min.):"
                        Margin="10,5,10,0" />
             <TextBox x:Name="TxtDuration"
                      Margin="10,0,10,10"
-                     Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding ShowingDuration, UpdateSourceTrigger=PropertyChanged}"
+                     IsEnabled="False" />
 
+            
             <TextBlock x:Name="TbTime"
-                       Text="Tidspunkt:"
+                       Text="Tidspunkt (TT:mm):"
                        Margin="10,5,10,0" />
             <TextBox x:Name="TxtTime"
                      Margin="10,0,10,10"
-                     Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}" />
+                     MaxLength="5"
+                     Text="{Binding TimeOfDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
 
             <TextBlock x:Name="TbDate"
                        Text="Dato"
-                       Margin="10,5,10,0"/>
-            <DatePicker Margin="10,0,10,10"/>
+                       Margin="10,5,10,0" />
+            <DatePicker x:Name="DatePicker"
+                        Margin="10,0,10,10"
+                        SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                        DisplayDateStart="{Binding SelectedMovie.PremierDate}"
+                        Text="{Binding SelectedMovie.PremierDate, Mode=TwoWay}" />
 
-            
+
             <Button x:Name="BtnAdd"
                     Content="Gem"
                     Width="75"
                     Margin="10, 50, 10, 10"
                     HorizontalAlignment="Left"
-                    Command="{Binding AddAndSaveCommand}" />
+                    Command="{Binding AddAndSaveShowingCommand}" />
         </StackPanel>
 
         <DataGrid x:Name="dgMovies"
                   Grid.Column="1"
                   Margin="5"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding MovieVMs}">
+                  ItemsSource="{Binding MovieVMs}"
+                  SelectedItem="{Binding SelectedMovie}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titel"
                                     Width="1*"

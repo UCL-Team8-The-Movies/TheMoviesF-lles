@@ -14,4 +14,5 @@ public partial class ShowingPageWindow : Window
         ShowingPageViewModel SPVM = new ShowingPageViewModel();
         DataContext = SPVM;
     }
+
 }
