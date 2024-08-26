@@ -6,7 +6,7 @@ namespace TheMovies.Test;
 
 
 [TestClass]
-public class UnitTest2
+public class MovieObjectTests
 {
 
     [TestMethod]
@@ -162,6 +162,7 @@ public class UnitTest2
     }
 
 
+    
 }
 
 
