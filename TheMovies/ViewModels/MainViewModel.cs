@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Navigation;
 using TheMovies.Models;
 using TheMovies.MVVM;
 using TheMovies.Persistence;
@@ -17,10 +15,8 @@ public class MainViewModel : ViewModelBase
 
     //Commands.
     //public RelayCommand NameOfCommand => new RelayCommand(execute => { }, canExecute => { return true; });
-    public RelayCommand GoToMoviePageCommand => new RelayCommand(execute => {
-        MoviePageWindow window1 = new MoviePageWindow();
-        window1.ShowDialog();
-    }, canExecute => { return true; });
+    public RelayCommand GoToMoviePageWindowCommand => new RelayCommand(execute => GoToMoviePageWindow(), canExecute => { return true; });
+    public RelayCommand GoToShowingPageWindowCommand => new RelayCommand(execute => GoToShowingPageWindow(), canExecute => { return true; });
 
 
     public MainViewModel()
@@ -88,5 +84,19 @@ public class MainViewModel : ViewModelBase
         }
     }
 
- 
+
+    public void GoToMoviePageWindow()
+    {
+        MoviePageWindow moviePageWindow = new MoviePageWindow();
+        moviePageWindow.ShowDialog();
+    }
+
+    public void GoToShowingPageWindow()
+    {
+        ShowingPageWindow showingPageWindow = new ShowingPageWindow();
+        showingPageWindow.ShowDialog();
+    }
+
+
+
 }

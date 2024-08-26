@@ -1,0 +1,114 @@
+﻿<Window x:Class="TheMovies.Views.ShowingPageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TheMovies.Views"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:viewmodels="clr-namespace:TheMovies.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:ShowingPageViewModel}"
+        mc:Ignorable="d"
+        Title="ShowingPageWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <TextBlock x:Name="TbCinema"
+                       Text="Biograf:"
+                       Margin="10,10,10,0" />
+            <ComboBox x:Name="CbCinema"
+                      Margin="10,0,10,5"
+                      Width="190"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding Cinemas}"
+                      SelectedItem="{Binding SelectedCinema}"
+                      DisplayMemberPath="Name" />
+
+            <TextBlock x:Name="TbMovieHall"
+                       Text="Biografsal:"
+                       Margin="10,10,10,0" />
+            <ComboBox x:Name="CbMovieHall"
+                      Margin="10,0,10,5"
+                      Width="190"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding CinemaHalls}"
+                      SelectedItem="{Binding SelectedCinemaHall}"/>
+
+            <TextBlock x:Name="TbMovie"
+                       Text="Film:"
+                       Margin="10,5,10,0" />
+            <TextBox x:Name="TxtMovie"
+                     Margin="10,0,10,10"
+                     Text="{Binding SelectedMovie.Title, UpdateSourceTrigger=PropertyChanged}"
+                     IsEnabled="False" />
+
+            <TextBlock x:Name="TbDuration"
+                       Text="Varighed (+30 min.):"
+                       Margin="10,5,10,0" />
+            <TextBox x:Name="TxtDuration"
+                     Margin="10,0,10,10"
+                     Text="{Binding ShowingDuration, UpdateSourceTrigger=PropertyChanged}"
+                     IsEnabled="False" />
+
+            
+            <TextBlock x:Name="TbTime"
+                       Text="Tidspunkt (TT:mm):"
+                       Margin="10,5,10,0" />
+            <TextBox x:Name="TxtTime"
+                     Margin="10,0,10,10"
+                     MaxLength="5"
+                     Text="{Binding TimeOfDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+
+            <TextBlock x:Name="TbDate"
+                       Text="Dato"
+                       Margin="10,5,10,0" />
+            <DatePicker x:Name="DatePicker"
+                        Margin="10,0,10,10"
+                        SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                        DisplayDateStart="{Binding SelectedMovie.PremierDate}"
+                        Text="{Binding SelectedMovie.PremierDate, Mode=TwoWay}" />
+
+
+            <Button x:Name="BtnAdd"
+                    Content="Gem"
+                    Width="75"
+                    Margin="10, 50, 10, 10"
+                    HorizontalAlignment="Left"
+                    Command="{Binding AddAndSaveShowingCommand}" />
+        </StackPanel>
+
+        <DataGrid x:Name="dgMovies"
+                  Grid.Column="1"
+                  Margin="5"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding MovieVMs}"
+                  SelectedItem="{Binding SelectedMovie}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titel"
+                                    Width="1*"
+                                    Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Varighed"
+                                    Width="1*"
+                                    Binding="{Binding Duration}" />
+                <DataGridTextColumn Header="Genre"
+                                    Width="1*"
+                                    Binding="{Binding Genre}" />
+                <DataGridTextColumn Header="Instruktør"
+                                    Width="1*"
+                                    Binding="{Binding Director}" />
+                <DataGridTextColumn Header="Præmieredato"
+                                    Width="1*"
+                                    Binding="{Binding PremierDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

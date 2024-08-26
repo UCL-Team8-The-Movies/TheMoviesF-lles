@@ -1,4 +1,5 @@
-﻿using TheMovies.Models;
+﻿using System.Diagnostics;
+using TheMovies.Models;
 using TheMovies.MVVM;
 
 namespace TheMovies.ViewModels;

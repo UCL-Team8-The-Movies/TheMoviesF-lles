@@ -5,6 +5,17 @@ public class Cinema
     public string Name { get; set; }
     public string City { get; set; }
 
-    //Ændrede fra list til string. Er der nemmere at hardcode at alle bigraferne har eks. 2 sale. (Det bliver svært at læse fra filen når det er en liste)
-    public string MaxCinemaHall { get; set; }
+
+
+    // Ændret til int (Se ShowingRepo LoadFromFile())
+    public int MaxCinemaHall { get; set; }
+
+    // Added Liste af Halls Property (Se ShowingRepo LoadFromFile())
+    public List<string> CinemaHalls { get; set; }
+
+    // Nye Cinema objekter skal bruge en liste til CinemaHalls (Se CinemaRepo)
+    public Cinema()
+    {
+        CinemaHalls = new List<string>();
+    }
 }
