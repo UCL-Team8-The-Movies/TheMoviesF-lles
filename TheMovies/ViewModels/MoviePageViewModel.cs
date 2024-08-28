@@ -7,7 +7,7 @@ namespace TheMovies.ViewModels;
 
 public class MoviePageViewModel : ViewModelBase
 {
-    public MovieRepo movieRepo;
+    public IRepo<Movie> movieRepo;
     public ObservableCollection<MovieViewModel> MovieVMs { get; set; }
 
     //Commands.

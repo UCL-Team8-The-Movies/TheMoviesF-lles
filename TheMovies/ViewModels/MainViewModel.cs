@@ -8,8 +8,8 @@ namespace TheMovies.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public CinemaRepo cinemaRepo;
-    public ShowingRepo showingRepo;
+    public IRepo<Cinema> cinemaRepo;
+    public IRepo<Showing> showingRepo;
 
     public ObservableCollection<ShowingViewModel> ShowingVMs { get; set; }
 

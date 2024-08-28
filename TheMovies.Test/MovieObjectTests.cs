@@ -12,7 +12,7 @@ public class MovieObjectTests
     [TestMethod]
     public void AddMovieMethodInMovieRepo()
     {
-        MovieRepo movierepo = new MovieRepo();
+        IRepo<Movie> movierepo = new MovieRepo();
         Movie movie = new Movie();
 
         movie.Title = "hej";
@@ -53,7 +53,7 @@ public class MovieObjectTests
         moviePageViewModel.Director = "John Smith";
         moviePageViewModel.PremierDate = new DateTime(2024, 8, 28, 2, 30, 00);
 
-        moviePageViewModel.movieRepo.ClearMovies();
+        moviePageViewModel.movieRepo.RemoveAll();
 
         //Tilf�j film til MoviePageViewModel's movierepo
         moviePageViewModel.AddMovie();

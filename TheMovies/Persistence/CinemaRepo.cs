@@ -2,7 +2,7 @@
 
 namespace TheMovies.Persistence;
 
-public class CinemaRepo
+public class CinemaRepo : IRepo<Cinema>
 {
     private List<Cinema> Cinemas = new List<Cinema>
     { 
@@ -12,11 +12,19 @@ public class CinemaRepo
         new Cinema() { Name = "Raehr Bio", City = "Raehr", MaxCinemaHall = 1, CinemaHalls = {"Sal 1"}},
     };
 
-
+    
     public IEnumerable<Cinema> GetAll()
     {
         return Cinemas;
     }
 
 
+    public void Add(Cinema entity) { }
+
+    public void LoadFromFile() { }
+
+
+    public void SaveToFile() { }
+
+    public void RemoveAll() { }
 }

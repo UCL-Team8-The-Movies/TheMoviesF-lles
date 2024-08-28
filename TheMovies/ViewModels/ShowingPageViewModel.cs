@@ -9,9 +9,9 @@ namespace TheMovies.ViewModels;
 
 public class ShowingPageViewModel : ViewModelBase
 {
-    public ShowingRepo showingRepo;
-    public MovieRepo movieRepo;
-    public CinemaRepo cinemaRepo;
+    public IRepo<Showing> showingRepo;
+    public IRepo<Movie> movieRepo;
+    public IRepo<Cinema> cinemaRepo;
 
 
     public ObservableCollection<MovieViewModel> MovieVMs { get; set; }

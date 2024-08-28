@@ -125,6 +125,7 @@ public class ShowingRepo : IRepo<Showing>
     }
 
 
-    public void ClearShowings() => showings.Clear();
+    public void RemoveAll() => showings.Clear();
+
 
 }
