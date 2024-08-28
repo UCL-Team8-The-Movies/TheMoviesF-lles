@@ -121,7 +121,7 @@ public class ShowingPageViewModel : ViewModelBase
         get { return selectedDate; }
         set
         {
-            selectedDate = value; 
+            selectedDate = value;
             OnPropertyChanged();
         }
     }
@@ -149,7 +149,7 @@ public class ShowingPageViewModel : ViewModelBase
             {
                 CinemaHalls.Add(hall);
             }
-            
+
         }
         SelectedCinemaHall = SelectedCinema.CinemaHalls[0];
     }
@@ -163,7 +163,7 @@ public class ShowingPageViewModel : ViewModelBase
     }
 
     public bool UpdateSelectedDateWithTime()
-    {     
+    {
         if (DateTime.TryParseExact(TimeOfDay, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedTime))
         {
             // Use a temporary variable to avoid recursion
@@ -228,16 +228,7 @@ public class ShowingPageViewModel : ViewModelBase
             ShowingDate = (DateTime)SelectedDate
         };
 
-
-
-        if (showing == null)
-        {
-            throw new ArgumentException("Movie, Cinema, CinemaHall, ShowingDuration and ShowingDate can't be empty!");
-        }
-        else
-        {
-            showingRepo.Add(showing);
-        }
+        showingRepo.Add(showing);
 
     }
 

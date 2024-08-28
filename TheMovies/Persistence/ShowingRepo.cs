@@ -26,10 +26,9 @@ public class ShowingRepo : IRepo<Showing>
 
     public void SaveToFile()
     {
-        using (StreamWriter sw = new StreamWriter(filePath, true))
+        using (StreamWriter sw = new StreamWriter(filePath))
         {
-            if (!File.Exists(this.filePath))           
-                sw.WriteLine("Filmtitel;Filmvarighed;Filmgenre;Filninstruktr;Filmprmieredato;Biografnavn;Biografby;MaxBiografSale;Biografsal;Forestillingsvarighed;Forestillingsdato");
+            sw.WriteLine("Filmtitel;Filmvarighed;Filmgenre;Filninstruktr;Filmprmieredato;Biografnavn;Biografby;MaxBiografSale;Biografsal;Forestillingsvarighed;Forestillingsdato");
 
             foreach (Showing showing in showings)
             {
@@ -59,10 +58,10 @@ public class ShowingRepo : IRepo<Showing>
                 int showingDuration;
                 DateTime showingDate;
 
-                if (int.TryParse(values[1], out movieDuration) 
+                if (int.TryParse(values[1], out movieDuration)
                     && DateTime.TryParse(values[4], out premierDate)
                     && int.TryParse(values[7], out maxCinemaHalls)
-                    && int.TryParse(values[9], out showingDuration) 
+                    && int.TryParse(values[9], out showingDuration)
                     && DateTime.TryParse(values[10], out showingDate))
                 {
 
@@ -94,13 +93,13 @@ public class ShowingRepo : IRepo<Showing>
                             Director = values[3],
                             PremierDate = premierDate
                         },
-                        
+
                         //sæt Cinema attribute i Showingobjektet til ovenstående Cinema objekt
                         Cinema = cinema,
                         CinemaHall = values[8],
                         ShowingDuration = showingDuration,
                         ShowingDate = showingDate
-                    }); 
+                    });
                 }
 
                 else
