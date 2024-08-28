@@ -23,7 +23,7 @@ public class ShowingPageViewModel : ViewModelBase
     //Commands.
     //public RelayCommand NameOfCommand => new RelayCommand(execute => { }, canExecute => { return true; });
     public RelayCommand AddAndSaveShowingCommand => new RelayCommand(execute => AddAndSaveShowing(), canExecute => CanAdd());
-
+    public RelayCommand BackToMainCommand => new RelayCommand(execute => BackToMain(), canExecute => { return true; });
 
     public ShowingPageViewModel()
     {
@@ -263,6 +263,13 @@ public class ShowingPageViewModel : ViewModelBase
             return false;
         else
             return true;
+    }
+
+    public void BackToMain()
+    {
+        MainWindow mainwinndow = new MainWindow();
+        mainwinndow.Show();
+        App.Current.Windows[0].Close();
     }
 
 

@@ -14,7 +14,7 @@ public class MoviePageViewModel : ViewModelBase
     //public RelayCommand NameOfCommand => new RelayCommand(execute => { }, canExecute => { return true; });
     public RelayCommand LoadCommand => new RelayCommand(execute => LoadFromFile(), canExecute => { return true; });
     public RelayCommand AddAndSaveCommand => new RelayCommand(execute => AddAndSave(), canExecute => CanAdd());
-
+    public RelayCommand BackToMainCommand => new RelayCommand(execute => BackToMain(), canExecute => { return true; });
 
     public MoviePageViewModel()
     {
@@ -145,5 +145,12 @@ public class MoviePageViewModel : ViewModelBase
             return true;
         }
 
+    }
+
+    public void BackToMain()
+    { 
+        MainWindow mainwinndow = new MainWindow();
+        mainwinndow.Show();
+        App.Current.Windows[0].Close();
     }
 }
