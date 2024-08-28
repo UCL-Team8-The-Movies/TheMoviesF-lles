@@ -58,7 +58,7 @@
                      Text="{Binding ShowingDuration, UpdateSourceTrigger=PropertyChanged}"
                      IsEnabled="False" />
 
-            
+
             <TextBlock x:Name="TbTime"
                        Text="Tidspunkt (TT:mm):"
                        Margin="10,5,10,0" />
@@ -77,13 +77,16 @@
                         DisplayDateStart="{Binding SelectedMovie.PremierDate}"
                         Text="{Binding SelectedMovie.PremierDate, Mode=TwoWay}" />
 
+            <StackPanel Orientation="Horizontal">
 
-            <Button x:Name="BtnAdd"
+                <Button x:Name="BtnAdd"
                     Content="Gem"
                     Width="75"
                     Margin="10, 50, 10, 10"
                     HorizontalAlignment="Left"
                     Command="{Binding AddAndSaveShowingCommand}" />
+                <Button x:Name="BtnBack" Content="Tilbage"  Width="75" Margin="10, 50, 10, 10" HorizontalAlignment="Left" Command="{Binding BackToMainCommand}"/>
+            </StackPanel>
         </StackPanel>
 
         <DataGrid x:Name="dgMovies"

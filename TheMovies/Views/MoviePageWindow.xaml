@@ -26,7 +26,10 @@
             <TextBox x:Name="TxtDirector" Margin="5" Text="{Binding Director, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock x:Name="TbPremierDate" Text="Præmieredato:" Margin="10"/>
             <TextBox x:Name="TxtPremierDate" Margin="5" Text="{Binding PremierDate, StringFormat='{}{0:MM/dd/yyyy}', UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Orientation="Horizontal">
             <Button x:Name="BtnAdd" Content="Tilføj" Width="75" Margin="10, 50, 10, 10" HorizontalAlignment="Left" Command="{Binding AddAndSaveCommand}"/>
+                <Button x:Name="BtnBack" Content="Tilbage"  Width="75" Margin="10, 50, 10, 10" HorizontalAlignment="Left" Command="{Binding BackToMainCommand}"/>
+            </StackPanel>
         </StackPanel>
 
         <DataGrid x:Name="dgMovies" Grid.Column="1" Margin="5" AutoGenerateColumns="False" ItemsSource="{Binding MovieVMs}">
